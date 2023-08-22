@@ -18,6 +18,11 @@ stages
      }
      }}
 
+    stage ('deploy to tomcat')
+    {steps { sshagent(['tomcat-cicd']) {
+    sh 'scp -o StrictHostKeyChecking=no **/*.war ec2-user@54.93.196.168:/usr/share/tomcat/webapps/'
+} }}
+
 }
 
 }
