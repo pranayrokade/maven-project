@@ -7,15 +7,17 @@ stages
   { steps { git branch: 'master', url: 'https://github.com/pranayrokade/maven-project.git' } }
 
 
-   stage ('execue unit test')
-   {steps { withMaven(globalMavenSettingsConfig: 'd7f5a893-fff6-46f6-9e1a-697c44df13e9', jdk: 'LocalJDK', maven: 'LOCALMVN', mavenSettingsConfig: '0e325b8e-c4eb-4728-928d-9730b7a366ef', traceability: true) 
-{ sh 'mvn test' } 
-}}
+  stage ('execute unit test')
+  {steps { withMaven(globalMavenSettingsConfig: 'd7f5a893-fff6-46f6-9e1a-697c44df13e9', jdk: 'LocalJDK', maven: 'LOCALMVN', mavenSettingsConfig: '0e325b8e-c4eb-4728-928d-9730b7a366ef', traceability: true) 
+{ sh 'mvn test' }
+ }}
 
- stage ('run sonar and build the code')
+
+stage ('run sonar and build the code')
 { steps { withSonarQubeEnv(credentialsId: 'sonar', installationName: 'sonar') { withMaven(globalMavenSettingsConfig: 'd7f5a893-fff6-46f6-9e1a-697c44df13e9', jdk: 'LocalJDK', maven: 'LOCALMVN', mavenSettingsConfig: '0e325b8e-c4eb-4728-928d-9730b7a366ef', traceability: true) 
-{ sh 'mvn package sonar:sonar' } 
+{ sh 'mvn package sonar:sonar' }
 } } }
+
 
 
 }
